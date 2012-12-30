@@ -1,0 +1,1 @@
+// TODO: register functions found in $.string, $.object, $.number to appropriate prototypes.
