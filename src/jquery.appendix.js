@@ -1,5 +1,13 @@
-/*global jQuery, Math*/
+/*! jQuery Appendix - v0.8.0
+* A small set of functions appended to jQuery that make your life even easier.
+*
+* https://github.com/michaldudek/jQuery-Appendix
+*
+* Copyright (c) 2013 Michał Dudek, http://www.michaldudek.pl, michal@michaldudek.pl
+* MIT License, https://github.com/michaldudek/jQuery-Appendix/blob/master/LICENSE.md
+*/
 
+/*global jQuery, Math*/
 (function($, Math, undefined) {
 	"use strict";
 
@@ -408,6 +416,8 @@
 
 			/**
 			 * Changes the given bytes to a user friendly string.
+			 *
+			 * TODO: add precision level so we can show e.g. 123,56 kb (so use number format afterwards)
 			 *
 			 * @param  {Number} bytes
 			 * @return {String}
