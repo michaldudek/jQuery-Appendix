@@ -483,16 +483,25 @@
 		/**
 		 * Return an ID of the DOM element or create one if it doesn't have an ID.
 		 *
-		 * TODO: set arbitrary ID $().uid('value')
-		 * TODO: make forcing of ID optional $().uid(true); Default: false.
-		 * 
-		 * @return {String}
+		 * @param  {String|Boolean|null} force Force an ID by passing a String (will set ID to that string) or a {Boolean} true - will generate a random unique ID. Passing null will unset the ID. Default: true.
+		 * @return {jQuery|String} Either the jQuery DOM element or a string with the retrieved or generated ID.
 		 */
-		uid : function() {
+		uid : function(force) {
+			force = (typeof force === undefined) ? false : force;
 			var $el = $(this[0]);
-			
+
+			// if setting a string ID then just set it and return the original object
+			if (typeof force === 'string') {
+				return $el.attr('id', force);
+			}
+
+			// if setting to null then unset the id
+			if (force === null) {
+				return $el.attr('id', null);
+			}
+
 			// if already has an id then just return it
-			if ($el.attr('id')) {
+			if (force === false || $el.attr('id')) {
 				return $el.attr('id');
 			}
 
