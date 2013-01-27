@@ -25,9 +25,19 @@
 		strictEqual($.object.size(new Plugin()), 2, 'Instantiated object only takes own properties into account');
 	});
 
+	module('Object Prototype Methods');
+	test('Object prototype', function() {
+		// TODO
+	});
+
 	module('Array Methods');
 	test('$.array.unique()', function() {
 		equal($.array.unique(['a', 'b', 'c', 'c', 'a', 'd']), ['a', 'b', 'c', 'd'], 'Removes repeating items');
+	});
+
+	module('Array Prototype Methods');
+	test('Object prototype', function() {
+		// TODO
 	});
 
 	module('String Methods');
@@ -74,6 +84,11 @@
 		// TODO
 	});
 
+	module('String Prototype Methods');
+	test('Object prototype', function() {
+		// TODO
+	});
+
 	module('Number Methods');
 	test('$.number.format()', function() {
 		// TODO
@@ -82,6 +97,11 @@
 		// TODO
 	});
 	test('$.number.secondsToTimeString()', function() {
+		// TODO
+	});
+
+	module('Number Prototype Methods');
+	test('Object prototype', function() {
 		// TODO
 	});
 
