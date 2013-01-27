@@ -1,4 +1,4 @@
-/*! jQuery Appendix - v0.8.0
+/*! jQuery Appendix - v0.8.1
 * A small set of functions appended to jQuery that make your life even easier.
 *
 * https://github.com/michaldudek/jQuery-Appendix
@@ -465,24 +465,6 @@
 	/* ################################################################
 	 * JQUERY EXTENSIONS
 	 * ################################################################ */
-
-	/**
-	 * BROWSER CLASS
-	 * 
-	 * Add a class representing the client's browser to the html element.
-	 */
-	$.browserClass = function() {
-		var browserClass = '';
-
-		$.each($.browser, function(i, val) {
-			if (val && (i !== 'version')) {
-				browserClass = (i === 'msie') ? 'ie' + $.browser.version.replace('.0', '') : i;
-			}
-		});
-
-		$('html').addClass(browserClass);
-	};
-
 	/**
 	 * Extend with some more custom functionality.
 	 */
@@ -501,12 +483,12 @@
 		/**
 		 * Return an ID of the DOM element or create one if it doesn't have an ID.
 		 *
-		 * TODO: set arbitrary ID $().id('value')
-		 * TODO: make forcing of ID optional $().id(true); Default: false.
+		 * TODO: set arbitrary ID $().uid('value')
+		 * TODO: make forcing of ID optional $().uid(true); Default: false.
 		 * 
 		 * @return {String}
 		 */
-		id : function() {
+		uid : function() {
 			var $el = $(this[0]);
 			
 			// if already has an id then just return it
