@@ -13,8 +13,8 @@
 (function($, window, undefined) {
 	"use strict";
 
-	$.each(['String', 'Object', 'Array', 'Number'], function(i, type) {
-		$.extend(window[type], $[type.toLowerCase()]);
+	$.each(['String', 'Array', 'Number'], function(i, type) {
+		$.extend(window[type].prototype, $[type.toLowerCase()]);
 	});
 
 })(jQuery, window);
