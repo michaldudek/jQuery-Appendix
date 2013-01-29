@@ -110,7 +110,7 @@
 					i;
 
 				for (i = 0; i < arr.length; i++) {
-					obj[arr[i]] = arr[i];
+					obj[typeof arr[i] + arr[i]] = arr[i];
 				}
 
 				for (i in obj) {
@@ -135,17 +135,23 @@
 			 * under 'foo' and 'bar' keys of the passed object.
 			 *
 			 * @param {String} str String to have the variables injected.
-			 * @param {Object} variables Object containing variables to be injected.
+			 * @param {Object} variables[optional] Object containing variables to be injected.
 			 * @return {String}
 			 */
 			parseVariables : function(str, variables) {
+				variables = variables || {};
+
 				return str.replace(/\{(\$?[\w\d]+)\}/gi, function(match, key) {
 					var dollar = (key.substr(0, 1) === '$'); // has dollar sign?
 					if (dollar) {
 						key = key.substr(1);
 					}
 
-					if (variables[key] !== undefined && variables[key] !== null) {
+					if (variables[key] === null) {
+						return '';
+					}
+
+					if (variables[key] !== undefined) {
 						return variables[key];
 					}
 
@@ -303,10 +309,9 @@
 					return str;
 				}
 
-				var res = str.substr(0, length)
-					.substr(0, res.lastIndexOf(' '));
+				var res = str.substr(0, length);
 
-				return res + suffix;
+				return res.substr(0, res.lastIndexOf(' ')) + suffix;
 			},
 
 			/**
@@ -538,7 +543,7 @@
 				return this;
 			}
 
-			$('body, html').animate({
+			$('body,html').animate({
 				scrollTop : $el.offset().top - margin
 			}, speed, callback);
 
