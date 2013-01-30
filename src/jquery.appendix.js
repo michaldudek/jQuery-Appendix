@@ -370,6 +370,16 @@
 				});
 							
 				return parseInt(seconds, 10);
+			},
+
+			/**
+			 * Checks if a string is numeric, ie. only contains numeric characters (therefore could be easily converted to int).
+			 * 
+			 * @param  {String}  str String to check.
+			 * @return {Boolean}
+			 */
+			isNumeric : function(str) {
+				return !isNaN(parseInt(str, 10));
 			}
 
 		},
