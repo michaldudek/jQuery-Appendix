@@ -89,6 +89,32 @@
 				}
 
 				return size;
+			},
+
+			/**
+			 * Sorts an object if it's a simple key-value (numeric) pair.
+			 * 
+			 * @param  {Object} obj  Object to be sorted.
+			 * @param  {Boolean} desc [optional] Sort descending? Default: false.
+			 * @return {Array} Sorted array in the form of [(key), (value)].
+			 */
+			sort : function(obj, desc) {
+				desc = desc || false;
+				var sortable = [];
+
+				$.each(obj, function(key, value) {
+					sortable.push([key, value]);
+				});
+
+				sortable.sort(function(a, b) {
+					return a[1] - b[1];
+				});
+
+				if (desc) {
+					sortable.reverse();
+				}
+
+				return sortable;
 			}
 
 		},
@@ -255,9 +281,20 @@
 					.replace(/([a-z])([0-9])/g, '$1' + separator + '$2');
 			},
 
-			// TODO
+			/**
+			 * Transforms all words in the string so that they start with uppercase letter.
+			 * 
+			 * @param  {String} str String to be transformed.
+			 * @return {String} Transformed string.
+			 */
 			toUpperCaseWords : function(str) {
-				return str;
+				var words = [];
+				
+				$.each(str.split(' '), function(i, word) {
+					words.push(word.charAt(0).toUpperCase() + word.substr(1));
+				});
+
+				return words.join(' ');
 			},
 
 			/**
