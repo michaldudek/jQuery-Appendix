@@ -1,4 +1,4 @@
-/*! jQuery Appendix - v0.8.1
+/*! jQuery Appendix - v0.8.2
 * A small set of functions appended to jQuery that make your life even easier.
 *
 * https://github.com/michaldudek/jQuery-Appendix
@@ -521,6 +521,29 @@
 	 * Extend with some more custom functionality.
 	 */
 	$.fn.extend({
+
+
+		/**
+		 * $.quickEach() replicates the functionality of $.each() but allows 'this'
+		 * to be used as a jQuery object without the need to wrap it using '$(this)'.
+		 * The performance boost comes from internally recycling a single jQuery
+		 * object instead of wrapping each iteration in a brand new one.
+		 *
+		 * @see https://gist.github.com/Striker21/1352993
+		 * 
+		 * @param  {[type]} f [description]
+		 * @return {[type]}   [description]
+		 */
+		quickEach : function(f) {
+			var j = $([0]),
+				i = -1,
+				l = this.length,
+				c;
+
+			while(++i < l && (c = j[0] = this[i]) && f.call(j, i, c) !== false) {}
+
+			return this;
+		},
 
 		/**
 		 * Check if the given element has the given attribute.
