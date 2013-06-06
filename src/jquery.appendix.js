@@ -1,4 +1,4 @@
-/*! jQuery Appendix - v0.8.3
+/*! jQuery Appendix - v0.8.4
 * A small set of functions appended to jQuery that make your life even easier.
 *
 * https://github.com/michaldudek/jQuery-Appendix
@@ -481,6 +481,12 @@
              * @return {String}
              */
             bytesToString : function(bytes) {
+                if (isNaN(bytes)) {
+                    return '';
+                }
+
+                bytes = parseInt(bytes, 10);
+
                 if (bytes < 1024) {
                     return bytes + ' b';
                 }
