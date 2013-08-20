@@ -1,0 +1,13 @@
+{
+  "name": "jquery-appendix",
+  "version": "0.1.0",
+  "main": "jquery.appendix.min.js",
+  "ignore": [
+    "**/.*",
+    "bundy.js",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
