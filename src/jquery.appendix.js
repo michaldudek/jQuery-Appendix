@@ -739,6 +739,28 @@
          */
         isBefore : function(selector) {
             return this.nextAll(selector).length > 0;
+        },
+
+        /**
+         * Calculates an offset relative to the given element.
+         * 
+         * @param  {String|jQuery} selector jQuery selector. Can also be a jQuery DOM object.
+         * @return {Object}
+         */
+        offsetRelative : function(selector) {
+            var $relativeEl = $(selector),
+                relativeEl = $relativeEl.get(0),
+                relativeOffset = relativeEl === document.documentElement || relativeEl === document.body
+                    ? {
+                        top: 0,
+                        left : 0
+                    } : $relativeEl.offset(),
+                offset = $(this).offset();
+
+            return {
+                top : offset.top - relativeOffset.top,
+                left : offset.left - relativeOffset.left
+            };
         }
 
     });
