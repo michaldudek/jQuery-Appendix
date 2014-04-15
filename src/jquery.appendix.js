@@ -613,16 +613,18 @@
          * @param {Number} callback [optional] Callback.
          * @param {Boolean} forceScroll [optional] Should always be scrolled? If not then if the element is visible
          *                              (within viewport) then scrolling will not happen (callback will be called immediately).
-         *                              Default: flase.
+         *                              Default: false.
+         * @param {String|jQuery} scrollElement [optional] What element to scroll? Selector or jQuery DOM object. Default: 'html, body'.
          * @return {jQuery} jQuery object for chaining.
          */
-        animateIntoView : function(speed, margin, callback, forceScroll) {
+        animateIntoView : function(speed, margin, callback, forceScroll, scrollElement) {
             speed = (speed === undefined) ? 200 : speed;
             margin = parseInt(margin, 10) || 0;
             callback = (typeof callback === 'function') ? callback : $.noop;
             forceScroll = forceScroll || false;
 
-            var $el = $(this[0]);
+            var $el = $(this[0]),
+                $scrollElement = scrollElement ? $(scrollElement) : $htmlAndBody;
 
             // break if there's no such item!
             if (!$el.length) {
@@ -637,7 +639,7 @@
                 return this;
             }
 
-            $htmlAndBody.animate({
+            $scrollElement.animate({
                 scrollTop : $el.offset().top - margin
             }, speed, callback);
 
