@@ -617,30 +617,35 @@
          * @param {String|jQuery} scrollElement [optional] What element to scroll? Selector or jQuery DOM object. Default: 'html, body'.
          * @return {jQuery} jQuery object for chaining.
          */
-        animateIntoView : function(speed, margin, callback, forceScroll, scrollElement) {
+        animateIntoView : function(speed, margin, callback, forceScroll, scrollElement, relativeToScrollElement) {
             speed = (speed === undefined) ? 200 : speed;
             margin = parseInt(margin, 10) || 0;
             callback = (typeof callback === 'function') ? callback : $.noop;
             forceScroll = forceScroll || false;
+            relativeToScrollElement = relativeToScrollElement || false;
 
             var $el = $(this[0]),
                 $scrollElement = scrollElement ? $(scrollElement) : $htmlAndBody;
 
             // break if there's no such item!
-            if (!$el.length) {
+            if (!$el.length || !$scrollElement.length) {
                 return this;
             }
 
             // check if element is inside the viewport and scrolling is not forced
+            var offsetTop = scrollElement && relativeToScrollElement ? $el.offsetRelative($scrollElement).top : $el.offset().top,
+                scrollTop = scrollElement && relativeToScrollElement ? $scrollElement.scrollTop() : $win.scrollTop(),
+                height = scrollElement && relativeToScrollElement ? $scrollElement.height() : $win.height();
+
             // then don't scroll if it's already visible
-            if (!forceScroll && $el.offset().top > $win.scrollTop() && $el.offset().top < ($win.scrollTop() + $win.height())) {
+            if (!forceScroll && offsetTop > scrollTop && offsetTop < (scrollTop + height)) {
                 // just call the callback
                 callback();
                 return this;
             }
 
             $scrollElement.animate({
-                scrollTop : $el.offset().top - margin
+                scrollTop : offsetTop - margin
             }, speed, callback);
 
             return this;
